@@ -1,0 +1,64 @@
+/* Basic reset and typography */
+:root{
+	--max-width: 1100px;
+	--muted: #6c757d;
+	--accent: #e76f51;
+	--bg: #ffffff;
+	--surface: #f8f9fa;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	color:#222;
+	background:var(--surface);
+	-webkit-font-smoothing:antialiased;
+}
+
+.container{max-width:var(--max-width); margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem}
+
+/* Header */
+.site-header{background:var(--bg);}
+.site-header .logo img{display:inline-block}
+.nav-link{color:var(--muted)}
+.nav-link.active{color:#111; font-weight:600}
+
+/* Main */
+.site-main{min-height:60vh}
+.view-root .card{background:var(--bg); border:1px solid #e9ecef}
+
+/* Cards and panels */
+.card{border-radius:8px}
+.card h2{margin-top:0}
+
+/* Forms */
+label{font-weight:600}
+input, select, textarea, .form-range{width:100%}
+
+/* Small utilities */
+.lead{color:var(--muted)}
+.small{font-size:.9rem}
+
+/* Footer */
+.site-footer{background:var(--bg)}
+
+/* Responsive behavior tweaks */
+@media (max-width: 768px){
+	.site-header .container{gap:.5rem}
+	.logo strong{font-size:1rem}
+}
+
+/* Accessibility helpers */
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* Chart placeholder sizing */
+canvas{width:100% !important; height:auto !important; display:block}
+
+/* Form specific tweaks */
+.survey .form-range{max-width:280px}
+
+/* Simple focus state */
+input:focus, textarea:focus, select:focus, button:focus{outline:3px solid rgba(14, 110, 240, 0.12); outline-offset:2px}
+

@@ -1,0 +1,41 @@
+<section class="visualizations" aria-labelledby="viz-title">
+    <header class="mb-4">
+        <h1 id="viz-title">Visualizaciones</h1>
+        <p class="lead">Panel de visualización de datos. Aquí se mostrará una serie de gráficos y tarjetas informativas.</p>
+    </header>
+
+    <article class="row g-3">
+        <div class="col-12 col-lg-8">
+            <section class="card p-3 h-100" aria-labelledby="chart-overview">
+                <h2 id="chart-overview" class="h5">Resumen</h2>
+                <div class="ratio ratio-16x9">
+                    <canvas data-chart="overview" width="800" height="450" aria-label="Gráfico de resumen"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <aside class="col-12 col-lg-4">
+            <section class="card p-3 mb-3" aria-labelledby="stats-title">
+                <h2 id="stats-title" class="h6">Estadísticas rápidas</h2>
+                <ul class="list-unstyled small">
+                    <li>Usuarios activos: <strong>1.234</strong></li>
+                    <li>Encuestas completadas: <strong>8.912</strong></li>
+                    <li>Promedio de bienestar: <strong>7.4</strong></li>
+                </ul>
+            </section>
+
+            <section class="card p-3" aria-labelledby="filters-title">
+                <h2 id="filters-title" class="h6">Filtros</h2>
+                <form class="d-flex flex-column gap-2">
+                    <label class="visually-hidden" for="period">Periodo</label>
+                    <select id="period" class="form-select form-select-sm">
+                        <option>Últimos 7 días</option>
+                        <option>Últimos 30 días</option>
+                        <option>Último año</option>
+                    </select>
+                    <button type="button" class="btn btn-primary btn-sm">Aplicar</button>
+                </form>
+            </section>
+        </aside>
+    </article>
+</section>
