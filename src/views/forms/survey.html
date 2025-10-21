@@ -1,0 +1,50 @@
+
+<section class="survey" aria-labelledby="survey-title">
+	<header class="mb-3">
+		<h1 id="survey-title">Encuesta: Cómo te sientes hoy</h1>
+		<p class="lead">Ayúdanos a entender tu estado emocional respondiendo estas preguntas breves.</p>
+	</header>
+
+	<form id="survey-form" class="card p-3" aria-describedby="survey-desc">
+		<p id="survey-desc" class="small text-muted">Los campos con * son obligatorios.</p>
+
+		<div class="mb-3">
+			<label for="age" class="form-label">Edad *</label>
+			<input type="number" id="age" name="age" class="form-control" min="0" max="120" required>
+		</div>
+
+		<fieldset class="mb-3">
+			<legend class="col-form-label">Estado de ánimo (escala 1-10) *</legend>
+			<div class="d-flex gap-2 flex-wrap">
+				<input type="range" id="mood" name="mood" min="1" max="10" value="7" class="form-range" aria-valuemin="1" aria-valuemax="10">
+				<output for="mood" id="moodVal">7</output>
+			</div>
+		</fieldset>
+
+		<div class="mb-3">
+			<label for="comments" class="form-label">Comentarios (opcional)</label>
+			<textarea id="comments" name="comments" rows="4" class="form-control" placeholder="¿Quieres contarnos más?"></textarea>
+		</div>
+
+		<div class="d-flex gap-2">
+			<button type="submit" class="btn btn-primary">Enviar</button>
+			<button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+		</div>
+	</form>
+
+	<script>
+		const mood = document.getElementById('mood');
+		const moodVal = document.getElementById('moodVal');
+		mood.addEventListener('input', ()=> moodVal.textContent = mood.value);
+
+		document.getElementById('survey-form').addEventListener('submit', (e)=>{
+			e.preventDefault();
+			const form = new FormData(e.target);
+			const data = Object.fromEntries(form.entries());
+			// placeholder: enviar a servicio
+			alert('Gracias! Datos: ' + JSON.stringify(data));
+			e.target.reset();
+			moodVal.textContent = '7';
+		});
+	</script>
+</section>

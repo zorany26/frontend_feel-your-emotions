@@ -1,0 +1,46 @@
+
+<section class="user-registration" aria-labelledby="user-title">
+	<header class="mb-3">
+		<h1 id="user-title">Registro de usuario</h1>
+		<p class="lead">Crea un nuevo usuario para guardar tus respuestas y ver visualizaciones personalizadas.</p>
+	</header>
+
+	<form id="user-form" class="card p-3" novalidate>
+		<div class="row g-3">
+			<div class="col-12 col-md-6">
+				<label for="user_name" class="form-label">Nombre completo *</label>
+				<input id="user_name" name="user_name" class="form-control" required>
+			</div>
+			<div class="col-12 col-md-6">
+				<label for="user_age" class="form-label">Edad *</label>
+				<input id="user_age" name="user_age" type="number" min="13" max="25" class="form-control" required>
+			</div>
+
+			<div class="col-12 col-md-6">
+				<label for="user_gender" class="form-label">Género</label>
+                <select id="user_gender" class="form-select form-select-sm">
+                    <option value="F">F</option>
+                    <option value="M">M</option>
+                    <option value="X" selected>X</option>
+                </select>
+			</div>
+			<div class="col-12 col-md-6">
+				<label for="user_phone" class="form-label">Teléfono</label>
+				<input id="user_phone" name="user_phone" type="tel" class="form-control" disabled>
+			</div>
+
+			<div class="col-12">
+				<label for="vulnerability_context" class="form-label">Contexto de Vulnerabilidad *</label>
+				<textarea id="vulnerability_context" name="vulnerability_context" rows="3" class="form-control" required></textarea>
+				<small class="text-muted">Por favor, describe tu situación actual.</small>
+			</div>
+
+			<div class="col-12 d-flex gap-2">
+				<button type="button" class="btn btn-primary" id="register_user_button">Crear usuario</button>
+				<button type="reset" class="btn btn-outline-secondary">Cancelar</button>
+			</div>
+		</div>
+	</form>
+
+	<script type="module" src="/src/controllers/forms/userController.js"></script>
+</section>
