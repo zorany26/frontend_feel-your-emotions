@@ -14,6 +14,19 @@ export async function createUser(newUser) {
     return user;
 }
 
+export async function generateRandomUsers() {
+    let postRequest = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    };
+
+    let serverResponse = await fetch(URL + 's/random', postRequest);
+    let message = await serverResponse.text();
+    return message;
+}
+
 export async function getUserById(id) {
     let getRequest = {
         method: "GET",

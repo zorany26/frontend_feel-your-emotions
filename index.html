@@ -19,6 +19,7 @@
                 <a class="nav-link active" href="#" data-view="visualizations">Visualizaciones</a>
                 <a class="nav-link" href="#" data-view="survey">Encuesta</a>
                 <a class="nav-link" href="#" data-view="user">Registro</a>
+                <a class="nav-link" href="#" data-view="users">Usuarios</a>
             </nav>
         </div>
     </header>
@@ -34,7 +35,7 @@
 
     <footer class="site-footer bg-white border-top">
         <div class="container py-3 text-center small text-muted">
-            © <span id="year"></span> Feel Your Emotions — Proyecto de visualización y formularios
+            © <span id="year"></span> Feel Your Emotions — Proyecto integrador Nuevas Tecnologías CESDE
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -46,8 +47,14 @@
         yearEl.textContent = new Date().getFullYear();
 
         async function loadView(name){
-            const path = `src/views/${name === 'visualizations' ? 'visualizations' : 'forms'}/${name}.html`;
+            const folders = {
+                'visualizations': ['visualizations', 'users'],
+                'forms': ['survey', 'user']
+            };
+            const folder = folders.visualizations.includes(name) ? 'visualizations' : 'forms';
+            const path = `src/views/${folder}/${name}.html`;
             try{
+                console.log('Loading view:', path);
                 const res = await fetch(path);
                 if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
                 const html = await res.text();

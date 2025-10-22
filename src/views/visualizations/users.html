@@ -1,0 +1,80 @@
+<section class="users-table" aria-labelledby="user-title">
+    <header class="mb-3">
+        <h1 id="user-title">Usuarios registrados</h2>
+            <p class="lead">Visualiza los usuarios registrados en la plataforma.</p>
+        </header>
+        <!--Tabla dashboard-->
+    <div class="card p-3 container border rounded-4 shadow bg-body-tertiary table-responsive">
+        <div class="col-12 mb-4"> <!--Barra de búsqueda-->
+            <form class="p-4 border rounded bg-body-secondary mt-5">
+                <input type="text" class="buscar form-control" id="buscar" disabled
+                    placeholder="Buscar por nombre" />
+            </form>
+        </div>
+        <table class="table table-striped table-hover table-sm">
+            <caption></caption>
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Contexto</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <!--DATOS-->
+            </tbody>
+        </table>
+    </div>
+    <!--Fin tabla dashboard-->
+
+    <!--Inicio Modal-->
+    <div class="modal fade" id="ventanaModal" tabindex="-1" aria-labelledby="ventanaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger fw-bolder text-white">
+                    <h1 class="modal-title fs-5" id="user-name"></h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="container">
+                                        <div class="row my-3">
+                                            <div class="col-6">
+                                                <label class="form-label">Edad:</label>
+                                                <input disabled class="form-control" type="text" id="user-age">
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="form-label">Género:</label>
+                                                <input disabled class="form-control" type="text" id="user-gender">
+                                            </div>
+                                        </div>
+                                        <div class="row my-3">
+                                            <div class="col-12">
+                                                <label class="form-label">Contexto de vulnerabilidad:</label>
+                                                <textarea disabled class="form-control" type="text" id="user-context"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5 card">
+                                    <label class="form-label fw-semibold">Evolución Bienestar:</label>
+                                    <ul class="list-group list-group-flush" id="listaSignosVitales"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info text-white" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin Modal-->
+    <script type="module" src="/src/controllers/visualizations/usersController.js"></script>
+</section>
