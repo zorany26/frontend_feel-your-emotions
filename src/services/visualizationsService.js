@@ -3,7 +3,7 @@ const URL = "http://localhost:8000/api/visualization";
 export async function getVisualizationByGraph(graphType) {
     const allowedTypes = [
         'mood-distribution',
-        'trend-analysis',
+        'gender-analysis',
         'correlation-heatmap',
         'risk-analysis',
         'context-analysis'

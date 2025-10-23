@@ -1,7 +1,8 @@
 <section class="visualizations" aria-labelledby="viz-title">
     <header class="mb-4">
         <h1 id="viz-title">Visualizaciones</h1>
-        <p class="lead">Panel de visualización de datos. Aquí se mostrará una serie de gráficos y tarjetas informativas.</p>
+        <p class="lead">Panel de visualización de datos. Aquí se mostrará una serie de gráficos y tarjetas informativas.
+        </p>
     </header>
 
     <article class="row g-3">
@@ -9,7 +10,14 @@
             <section class="card p-3 h-100" aria-labelledby="chart-overview">
                 <h2 id="chart-overview" class="h5">Resumen</h2>
                 <div class="ratio ratio-16x9">
-                    <canvas data-chart="overview" width="800" height="450" aria-label="Gráfico de resumen"></canvas>
+                    <div data-chart="overview" width="800" height="450" aria-label="Gráfico de resumen" id="chart-container">
+                    </div>
+                    <!-- Controles de zoom -->
+                    <div class="zoom-controls">
+                        <button id="zoom-in">+</button>
+                        <button id="zoom-out">-</button>
+                        <button id="zoom-reset">⟳</button>
+                    </div>
                 </div>
             </section>
         </div>
@@ -27,15 +35,17 @@
             <section class="card p-3" aria-labelledby="filters-title">
                 <h2 id="filters-title" class="h6">Filtros</h2>
                 <form class="d-flex flex-column gap-2">
-                    <label class="visually-hidden" for="period">Periodo</label>
-                    <select id="period" class="form-select form-select-sm">
-                        <option>Últimos 7 días</option>
-                        <option>Últimos 30 días</option>
-                        <option>Último año</option>
+                    <label class="visually-hidden" for="period">Tipo de gráfico</label>
+                    <select id="visualization-type" class="form-select form-select-sm">
+                        <option selected value="mood-distribution">Distribución de animo</option>
+                        <option value="correlation-heatmap">Mapa de calor correlaciones</option>
+                        <option value="risk-analysis">Análisis por contexto</option>
+                        <option value="gender-analysis">Análisis por género</option>
                     </select>
                     <button type="button" class="btn btn-primary btn-sm">Aplicar</button>
                 </form>
             </section>
         </aside>
     </article>
+    <script type="module" src="/src/controllers/visualizations/visualizationsController.js"></script>
 </section>

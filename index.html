@@ -70,21 +70,6 @@
                     newScript.textContent = script.textContent;
                     script.parentNode.replaceChild(newScript, script);
                 }
-
-                // run simple init for charts placeholder
-                if(name === 'visualizations'){
-                    const canvases = viewRoot.querySelectorAll('canvas[data-chart]');
-                    canvases.forEach(c => {
-                        const ctx = c.getContext('2d');
-                        // simple placeholder drawing
-                        ctx.fillStyle = '#f3f3f3';
-                        ctx.fillRect(0,0,c.width,c.height);
-                        ctx.fillStyle = '#d9534f';
-                        ctx.fillRect(10, c.height-30, 40, 30);
-                        ctx.fillStyle = '#5bc0de';
-                        ctx.fillRect(60, c.height-60, 40, 60);
-                    })
-                }
             }catch(err){
                 viewRoot.innerHTML = `<div class="alert alert-danger" role="alert">No se pudo cargar la vista: ${err.message}</div>`;
             }

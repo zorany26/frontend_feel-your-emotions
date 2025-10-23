@@ -1,4 +1,8 @@
-import { getUsers, getUserById, generateRandomUsers } from "/src/services/userService.js";
+import {
+  getUsers,
+  getUserById,
+  generateRandomUsers,
+} from "/src/services/userService.js";
 
 function showViewInfo() {
   let captionTabla = document.querySelector("caption");
@@ -17,14 +21,16 @@ function showViewInfo() {
         createRandomUsersBtn.textContent = "Crear usuarios de prueba";
         captionTabla.appendChild(createRandomUsersBtn);
         createRandomUsersBtn.addEventListener("click", () => {
-          generateRandomUsers().then((response) => {
-            console.log(response);
-        }).catch(() => {
-            console.error("Error al crear usuarios de prueba");
+          generateRandomUsers()
+            .then((response) => {
+              console.log(response);
+            })
+            .catch(() => {
+              console.error("Error al crear usuarios de prueba");
+            });
+          // borrar botón después de crear usuarios
+          createRandomUsersBtn.remove();
         });
-        // borrar botón después de crear usuarios
-        createRandomUsersBtn.remove();
-      });
       }
     })
     .catch(function (error) {
@@ -106,10 +112,4 @@ async function filterTable(filterText) {
   }
 }
 
-// Initialize controller when the module is loaded
 showViewInfo();
-document.addEventListener("DOMContentLoaded", (e) => {
-  e.preventDefault();
-  showViewInfo();
-  console.log("Users controller initialized on DOMContentLoaded");
-});
