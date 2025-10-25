@@ -1,40 +1,30 @@
 import {
   getUsers,
   getUserById,
-  generateRandomUsers,
 } from "/src/services/userService.js";
 
 function showViewInfo() {
+  showLoading(true);
   let captionTabla = document.querySelector("caption");
   getUsers()
     .then(function (backendResponse) {
       console.log(backendResponse);
+      showLoading(false);
       showTable(backendResponse);
       if (backendResponse.length != 0) {
         captionTabla.innerHTML = "Da click en la fila para ver detalles";
-        findInput.removeAttribute("disabled");
+        let findInput = document.querySelector("#buscar");
+        if (findInput) {
+          findInput.removeAttribute("disabled");
+        }
       } else {
+        showLoading(false);
         captionTabla.innerHTML = "La tabla no cuenta con registros";
-        // crear botón para crear nuevo usuario
-        let createRandomUsersBtn = document.createElement("button");
-        createRandomUsersBtn.classList.add("btn", "btn-primary", "mt-3");
-        createRandomUsersBtn.textContent = "Crear usuarios de prueba";
-        captionTabla.appendChild(createRandomUsersBtn);
-        createRandomUsersBtn.addEventListener("click", () => {
-          generateRandomUsers()
-            .then((response) => {
-              console.log(response);
-            })
-            .catch(() => {
-              console.error("Error al crear usuarios de prueba");
-            });
-          // borrar botón después de crear usuarios
-          createRandomUsersBtn.remove();
-        });
       }
     })
     .catch(function (error) {
       console.error(error);
+      showLoading(false);
       captionTabla.innerHTML =
         "Hubo un error al traer la información desde el servidor 😕";
     });
@@ -42,6 +32,8 @@ function showViewInfo() {
 
 function showTable(users) {
   let tableBody = document.querySelector("table tbody");
+  if (!tableBody) return;
+  
   tableBody.innerHTML = "";
 
   users.forEach((user) => {
@@ -59,15 +51,28 @@ function showTable(users) {
   });
 }
 
-let tableBody = document.querySelector("table tbody");
-tableBody.addEventListener("click", (event) => {
-  let rowId = event.target.parentElement.id;
-  console.log(rowId);
-  if (rowId.startsWith("usr-")) {
-    console.log("Showing modal for", rowId.slice(4));
-    showUserWindowModal(rowId.slice(4));
+function initializeEventListeners() {
+  // Event listener para la tabla
+  let tableBody = document.querySelector("table tbody");
+  if (tableBody) {
+    tableBody.addEventListener("click", (event) => {
+      let rowId = event.target.parentElement.id;
+      console.log(rowId);
+      if (rowId.startsWith("usr-")) {
+        console.log("Showing modal for", rowId.slice(4));
+        showUserWindowModal(rowId.slice(4));
+      }
+    });
   }
-});
+
+  // Event listener para el input de búsqueda
+  let findInput = document.querySelector("#buscar");
+  if (findInput) {
+    findInput.addEventListener("keyup", () => {
+      filterTable(findInput.value);
+    });
+  }
+}
 
 function showUserWindowModal(id) {
   let userNameH1 = document.getElementById("user-name");
@@ -78,21 +83,15 @@ function showUserWindowModal(id) {
   getUserById(id)
     .then(function (backendResponse) {
       console.log(backendResponse);
-      userNameH1.textContent = backendResponse.name;
-      userAgeInput.value = backendResponse.age;
-      userGenderInput.value = backendResponse.gender;
-      userContextTextArea.value = backendResponse.context;
+      if (userNameH1) userNameH1.textContent = backendResponse.name;
+      if (userAgeInput) userAgeInput.value = backendResponse.age;
+      if (userGenderInput) userGenderInput.value = backendResponse.gender;
+      if (userContextTextArea) userContextTextArea.value = backendResponse.context;
     })
     .catch(function (error) {
       console.error(error);
     });
 }
-
-let findInput = document.querySelector("#buscar");
-
-findInput.addEventListener("keyup", () => {
-  filterTable(findInput.value);
-});
 
 async function filterTable(filterText) {
   try {
@@ -112,4 +111,23 @@ async function filterTable(filterText) {
   }
 }
 
-showViewInfo();
+function showLoading(show) {
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const tableContainer = document.getElementById('table-container');
+    const noDataMessage = document.getElementById('no-data-message');
+    
+    if (show) {
+        if (loadingSpinner) loadingSpinner.classList.remove('d-none');
+        if (tableContainer) tableContainer.classList.add('d-none');
+        if (noDataMessage) noDataMessage.classList.add('d-none');
+    } else {
+        if (loadingSpinner) loadingSpinner.classList.add('d-none');
+    }
+}
+
+// Inicializar cuando se carga la página
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Inicializando vista de usuarios...');
+  showViewInfo();
+  initializeEventListeners();
+});

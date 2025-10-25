@@ -1,51 +1,93 @@
-<section class="visualizations" aria-labelledby="viz-title">
-    <header class="mb-4">
-        <h1 id="viz-title">Visualizaciones</h1>
-        <p class="lead">Panel de visualización de datos. Aquí se mostrará una serie de gráficos y tarjetas informativas.
-        </p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizaciones - Feel Your Emotions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+</head>
+<body>
+    <header class="site-header bg-light border-bottom">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between py-3">
+            <a href="../../../index.html" class="d-flex align-items-center text-dark text-decoration-none logo">
+                <strong>👐🏻 Feel Your Emotions</strong>
+            </a>
+
+            <nav class="nav nav-pills flex-wrap">
+                <a class="nav-link" href="../../../index.html">Inicio</a>
+                <a class="nav-link active" href="visualizations.html">Visualizaciones</a>
+                <a class="nav-link" href="../forms/survey.html">Encuesta</a>
+                <a class="nav-link" href="../forms/user.html">Registro</a>
+                <a class="nav-link" href="users.html">Usuarios</a>
+                <a class="nav-link" href="reports.html">Reportes</a>
+            </nav>
+        </div>
     </header>
 
-    <article class="row g-3">
-        <div class="col-12 col-lg-8">
-            <section class="card p-3 h-100" aria-labelledby="chart-overview">
-                <h2 id="chart-overview" class="h5">Resumen</h2>
-                <div class="ratio ratio-16x9">
-                    <div data-chart="overview" width="800" height="450" aria-label="Gráfico de resumen" id="chart-container">
+    <main id="app" class="site-main">
+        <div class="container py-4">
+            <section class="visualizations" aria-labelledby="viz-title">
+                <header class="mb-4">
+                    <h1 id="viz-title">Visualizaciones</h1>
+                    <p class="lead">Panel de visualización de datos. Aquí se mostrará una serie de gráficos y tarjetas informativas.
+                    </p>
+                </header>
+
+                <article class="row g-3">
+                    <div class="col-12 col-lg-8">
+                        <section class="card p-3 h-100" aria-labelledby="chart-overview">
+                            <h2 id="chart-overview" class="h5">Resumen</h2>
+                            <div class="chart-wrapper">
+                                <div data-chart="overview" width="800" height="450" aria-label="Gráfico de visualización interactivo con zoom y paneo" id="chart-container">
+                                    <!-- El gráfico se renderizará aquí -->
+                                </div>
+                                <!-- Controles de zoom dentro del marco -->
+                                <fieldset class="zoom-controls">
+                                    <legend class="visually-hidden">Controles de zoom y navegación</legend>
+                                    <button id="zoom-in" type="button" aria-label="Acercar zoom" title="Acercar zoom">+</button>
+                                    <button id="zoom-out" type="button" aria-label="Alejar zoom" title="Alejar zoom">-</button>
+                                    <button id="zoom-reset" type="button" aria-label="Restablecer zoom" title="Restablecer zoom">⟳</button>
+                                </fieldset>
+                            </div>
+                        </section>
                     </div>
-                    <!-- Controles de zoom -->
-                    <div class="zoom-controls">
-                        <button id="zoom-in">+</button>
-                        <button id="zoom-out">-</button>
-                        <button id="zoom-reset">⟳</button>
-                    </div>
-                </div>
+
+                    <aside class="col-12 col-lg-4">
+                        <section class="card p-3 mb-3" aria-labelledby="stats-title">
+                            <h2 id="stats-title" class="h6">Estadísticas rápidas</h2>
+                            <ul class="list-unstyled small">
+                                <li>Usuarios activos: <strong>1.234</strong></li>
+                                <li>Encuestas completadas: <strong>8.912</strong></li>
+                                <li>Promedio de bienestar: <strong>7.4</strong></li>
+                            </ul>
+                        </section>
+
+                        <section class="card p-3" aria-labelledby="filters-title">
+                            <h2 id="filters-title" class="h6">Filtros</h2>
+                            <form class="d-flex flex-column gap-2">
+                                <label class="visually-hidden" for="visualization-type">Tipo de gráfico</label>
+                                <select id="visualization-type" class="form-select form-select-sm">
+                                    <option selected value="mood-distribution">Distribución de ánimo</option>
+                                    <option value="correlation-heatmap">Mapa de calor correlaciones</option>
+                                    <option value="risk-analysis">Análisis por contexto</option>
+                                    <option value="gender-analysis">Análisis por género</option>
+                                </select>
+                            </form>
+                        </section>
+                    </aside>
+                </article>
             </section>
         </div>
+    </main>
 
-        <aside class="col-12 col-lg-4">
-            <section class="card p-3 mb-3" aria-labelledby="stats-title">
-                <h2 id="stats-title" class="h6">Estadísticas rápidas</h2>
-                <ul class="list-unstyled small">
-                    <li>Usuarios activos: <strong>1.234</strong></li>
-                    <li>Encuestas completadas: <strong>8.912</strong></li>
-                    <li>Promedio de bienestar: <strong>7.4</strong></li>
-                </ul>
-            </section>
-
-            <section class="card p-3" aria-labelledby="filters-title">
-                <h2 id="filters-title" class="h6">Filtros</h2>
-                <form class="d-flex flex-column gap-2">
-                    <label class="visually-hidden" for="period">Tipo de gráfico</label>
-                    <select id="visualization-type" class="form-select form-select-sm">
-                        <option selected value="mood-distribution">Distribución de animo</option>
-                        <option value="correlation-heatmap">Mapa de calor correlaciones</option>
-                        <option value="risk-analysis">Análisis por contexto</option>
-                        <option value="gender-analysis">Análisis por género</option>
-                    </select>
-                    <button type="button" class="btn btn-primary btn-sm">Aplicar</button>
-                </form>
-            </section>
-        </aside>
-    </article>
-    <script type="module" src="/src/controllers/visualizations/visualizationsController.js"></script>
-</section>
+    <footer class="site-footer bg-white border-top">
+        <div class="container py-3 text-center small text-muted">
+            © <span id="year"></span> Feel Your Emotions — Proyecto integrador Nuevas Tecnologías CESDE
+        </div>
+    </footer>
+    
+    <script type="module" src="../../controllers/visualizations/visualizationsController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="" crossorigin="anonymous"></script>
+</body>
+</html>

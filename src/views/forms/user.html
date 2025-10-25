@@ -1,46 +1,99 @@
 
-<section class="user-registration" aria-labelledby="user-title">
-	<header class="mb-3">
-		<h1 id="user-title">Registro de usuario</h1>
-		<p class="lead">Crea un nuevo usuario para guardar tus respuestas y ver visualizaciones personalizadas.</p>
-	</header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - Feel Your Emotions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+</head>
+<body>
+    <header class="site-header bg-light border-bottom">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between py-3">
+            <a href="../../../index.html" class="d-flex align-items-center text-dark text-decoration-none logo">
+                <strong>👐🏻 Feel Your Emotions</strong>
+            </a>
 
-	<form id="user-form" class="card p-3" novalidate>
-		<div class="row g-3">
-			<div class="col-12 col-md-6">
-				<label for="user_name" class="form-label">Nombre completo *</label>
-				<input id="user_name" name="user_name" class="form-control" required>
-			</div>
-			<div class="col-12 col-md-6">
-				<label for="user_age" class="form-label">Edad *</label>
-				<input id="user_age" name="user_age" type="number" min="13" max="25" class="form-control" required>
-			</div>
+            <nav class="nav nav-pills flex-wrap">
+                <a class="nav-link" href="../../../index.html">Inicio</a>
+                <a class="nav-link" href="../visualizations/visualizations.html">Visualizaciones</a>
+                <a class="nav-link" href="survey.html">Encuesta</a>
+                <a class="nav-link active" href="user.html">Registro</a>
+                <a class="nav-link" href="../visualizations/users.html">Usuarios</a>
+                <a class="nav-link" href="../visualizations/reports.html">Reportes</a>
+            </nav>
+        </div>
+    </header>
 
-			<div class="col-12 col-md-6">
-				<label for="user_gender" class="form-label">Género</label>
-                <select id="user_gender" class="form-select form-select-sm">
-                    <option value="F">F</option>
-                    <option value="M">M</option>
-                    <option value="X" selected>X</option>
-                </select>
-			</div>
-			<div class="col-12 col-md-6">
-				<label for="user_phone" class="form-label">Teléfono</label>
-				<input id="user_phone" name="user_phone" type="tel" class="form-control" disabled>
-			</div>
+    <main id="app" class="site-main">
+        <div class="container py-4">
+            <section class="row justify-content-center" aria-labelledby="user-form-title">
+                <div class="col-12 col-lg-8 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 id="user-form-title" class="h3 m-0">Registro de usuario</h1>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-4">Complete el formulario para registrar un nuevo usuario en la plataforma</p>
+                            
+                            <form id="user-form" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label for="user_name" class="form-label">Nombre completo *</label>
+                                        <input id="user_name" name="user_name" class="form-control" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="user_age" class="form-label">Edad *</label>
+                                        <input id="user_age" name="user_age" type="number" min="13" max="25" class="form-control" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
 
-			<div class="col-12">
-				<label for="vulnerability_context" class="form-label">Contexto de Vulnerabilidad *</label>
-				<textarea id="vulnerability_context" name="vulnerability_context" rows="3" class="form-control" required></textarea>
-				<small class="text-muted">Por favor, describe tu situación actual.</small>
-			</div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="user_gender" class="form-label">Género</label>
+                                        <select id="user_gender" class="form-select">
+                                            <option value="F">Femenino</option>
+                                            <option value="M">Masculino</option>
+                                            <option value="X" selected>No especificado</option>
+                                        </select>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="user_phone" class="form-label">Teléfono</label>
+                                        <input id="user_phone" name="user_phone" type="tel" class="form-control" disabled>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
 
-			<div class="col-12 d-flex gap-2">
-				<button type="button" class="btn btn-primary" id="register_user_button">Crear usuario</button>
-				<button type="reset" class="btn btn-outline-secondary">Cancelar</button>
-			</div>
-		</div>
-	</form>
+                                    <div class="col-12">
+                                        <label for="vulnerability_context" class="form-label">Contexto de Vulnerabilidad *</label>
+                                        <textarea id="vulnerability_context" name="vulnerability_context" rows="3" class="form-control" required></textarea>
+                                        <small class="text-muted">Por favor, describe tu situación actual.</small>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
 
-	<script type="module" src="/src/controllers/forms/userController.js"></script>
-</section>
+                                    <div class="col-12 d-flex gap-2">
+                                        <button type="button" class="btn btn-primary" id="register_user_button">Crear usuario</button>
+                                        <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+                                        <button type="button" class="btn btn-outline-secondary" id="generate_users_button">Generar usuarios aleatorios</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer bg-white border-top">
+        <div class="container py-3 text-center small text-muted">
+            © <span id="year"></span> Feel Your Emotions — Proyecto integrador Nuevas Tecnologías CESDE
+        </div>
+    </footer>
+    
+    <script type="module" src="../../controllers/forms/userController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="" crossorigin="anonymous"></script>
+</body>
+</html>

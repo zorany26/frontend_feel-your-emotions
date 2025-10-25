@@ -19,9 +19,23 @@ body {
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 	color: #222;
 	background: var(--surface);
 	-webkit-font-smoothing: antialiased;
+}
+
+.site-main {
+	flex: 1 0 auto;
+}
+
+.site-footer {
+	flex-shrink: 0;
+	margin-top: auto;
+	background-color: #ffffff !important;
+	border-top: 1px solid #dee2e6 !important;
 }
 
 .container {
@@ -34,20 +48,82 @@ body {
 
 /* Header */
 .site-header {
-	background: var(--bg);
+	background: var(--bg) !important;
+	border-bottom: 1px solid #dee2e6 !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.site-header .container {
+	min-height: 64px;
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	padding-top: 1rem !important;
+	padding-bottom: 1rem !important;
+}
+
+.site-header .logo {
+	display: flex !important;
+	align-items: center !important;
+	gap: 0.5rem;
+	font-weight: 600 !important;
+	font-size: 1.125rem !important;
+	text-decoration: none !important;
+	color: #212529 !important;
+}
+
+.site-header .logo:hover {
+	color: #212529 !important;
+	text-decoration: none !important;
 }
 
 .site-header .logo img {
-	display: inline-block
+	display: inline-block !important;
+	flex-shrink: 0;
+	height: 40px !important;
+	width: auto !important;
+	background: #eee !important;
+	border-radius: 6px !important;
+	margin-right: 0.5rem !important;
 }
 
-.nav-link {
-	color: var(--muted)
+.site-header .nav {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	gap: 0.25rem;
+	list-style: none;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
-.nav-link.active {
-	color: #111;
-	font-weight: 600
+.site-header .nav-link {
+	color: var(--muted) !important;
+	padding: 0.5rem 0.75rem !important;
+	border-radius: 6px !important;
+	text-decoration: none !important;
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	border: none !important;
+	background: transparent !important;
+	font-weight: 400 !important;
+}
+
+.site-header .nav-link:hover {
+	color: #111 !important;
+	background-color: rgba(0, 0, 0, 0.05) !important;
+	text-decoration: none !important;
+}
+
+.site-header .nav-link.active {
+	color: #fff !important;
+	font-weight: 600 !important;
+	background-color: #0d6efd !important;
+}
+
+.site-header .nav-link.active:hover {
+	color: #fff !important;
+	background-color: #0b5ed7 !important;
 }
 
 /* Main */
@@ -98,11 +174,42 @@ textarea,
 /* Responsive behavior tweaks */
 @media (max-width: 768px) {
 	.site-header .container {
-		gap: .5rem
+		gap: 0.5rem;
+		flex-direction: column;
+		align-items: flex-start;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+
+	.site-header .nav {
+		width: 100%;
+		justify-content: center;
+		margin-top: 0.5rem;
 	}
 
 	.logo strong {
-		font-size: 1rem
+		font-size: 1rem;
+	}
+
+	.nav-link {
+		font-size: 0.875rem;
+		padding: 0.375rem 0.5rem;
+	}
+}
+
+@media (max-width: 576px) {
+	.site-header .nav {
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+
+	.nav-link {
+		font-size: 0.8rem;
+		padding: 0.25rem 0.4rem;
+	}
+
+	.site-header .container {
+		min-height: auto;
 	}
 }
 
@@ -123,7 +230,170 @@ canvas {
 	display: block
 }
 
-/* Form specific tweaks */
+/* Survey specific styles */
+.min-width-40 {
+	min-width: 40px;
+	text-align: center;
+}
+
+#questions-container fieldset {
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-radius: 0.375rem;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+#questions-container legend {
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+	padding: 0 0.5rem;
+	width: auto;
+}
+
+.form-range {
+	cursor: pointer;
+}
+
+.form-range:focus {
+	outline: none;
+	box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Survey form layout improvements */
+.survey-question {
+	background: #f8f9fa;
+	border-radius: 0.375rem;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.range-container {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 0.5rem;
+}
+
+.range-labels {
+	font-size: 0.875rem;
+	color: #6c757d;
+	min-width: 20px;
+	text-align: center;
+}
+
+/* Form validation improvements */
+.is-invalid ~ .invalid-feedback {
+	display: block;
+}
+
+/* Home page card improvements */
+.welcome .card {
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	border-radius: 12px;
+	min-height: 280px;
+}
+
+.welcome .card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.welcome .card-body {
+	padding: 1.75rem 1.25rem;
+}
+
+.welcome .card-title {
+	font-weight: 600;
+	color: #212529;
+	margin-bottom: 1rem;
+}
+
+.welcome .card-text {
+	color: #6c757d;
+	font-size: 0.9rem;
+	line-height: 1.5;
+	margin-bottom: 0;
+}
+
+.welcome .btn {
+	border-radius: 8px;
+	font-weight: 500;
+	padding: 0.5rem 1.25rem;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.welcome .btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon styling */
+.welcome .display-4 {
+	font-size: 2.5rem;
+	line-height: 1;
+}
+
+/* Reports specific styles */
+#surveys-table th {
+	background-color: #f8f9fa;
+	border-bottom: 2px solid #dee2e6;
+	font-weight: 600;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.025em;
+}
+
+#surveys-table td {
+	vertical-align: middle;
+	padding: 0.75rem 0.5rem;
+}
+
+#surveys-table tbody tr:hover {
+	background-color: rgba(0, 123, 255, 0.05);
+}
+
+.status-badge {
+	font-size: 0.75rem;
+	padding: 0.25rem 0.5rem;
+}
+
+.reports-actions .btn {
+	white-space: nowrap;
+}
+
+#filter-info {
+	border-left: 4px solid #0d6efd;
+}
+
+.table-responsive {
+	border-radius: 0.375rem;
+	overflow: hidden;
+}
+
+/* Modal improvements for survey details */
+.modal-lg {
+	max-width: 800px;
+}
+
+.survey-detail-section {
+	border: 1px solid #dee2e6;
+	border-radius: 0.375rem;
+	padding: 1rem;
+	background-color: #f8f9fa;
+}
+
+/* Loading and empty states */
+#loading-spinner .spinner-border {
+	width: 3rem;
+	height: 3rem;
+}
+
+#no-data-message {
+	color: #6c757d;
+}
+
+/* Form enhancements */
 .survey .form-range {
 	max-width: 280px
 }
@@ -137,12 +407,24 @@ button:focus {
 	outline-offset: 2px
 }
 
+/* Contenedor wrapper del gráfico */
+.chart-wrapper {
+	position: relative;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
 /* Contenedor principal del gráfico */
 [data-chart="overview"] {
 	border: 1px solid #ccc;
 	overflow: hidden;
 	background-color: #fafafa;
 	margin-bottom: 10px;
+	position: relative;
+	border-radius: 8px;
+	height: 400px; /* Altura fija para evitar desbordamiento */
+	max-height: 400px;
+	width: 100%;
 }
 
 /* SVG ajustable */
@@ -152,27 +434,112 @@ button:focus {
 	transform-origin: center center;
 	transition: transform 0.05s ease-out;
 	cursor: grab;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	touch-action: none;
 }
 
-/* Controles fuera del contenedor */
+/* Estado de arrastre */
+[data-chart="overview"] svg:active {
+	cursor: grabbing;
+}
+
+/* Controles superpuestos dentro del contenedor */
 .zoom-controls {
+	position: absolute;
+	top: 10px;
+	right: 10px;
 	display: flex;
-	gap: 8px;
-	justify-content: flex-start;
+	flex-direction: column;
+	gap: 5px;
+	border: none;
+	padding: 0;
+	margin: 0;
+	z-index: 10;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 6px;
+	padding: 5px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.zoom-controls legend {
+	display: none;
 }
 
 .zoom-controls button {
-	width: 35px;
-	height: 35px;
+	width: 32px;
+	height: 32px;
 	border: none;
 	background: #fff;
 	border-radius: 4px;
-	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: bold;
+	color: #333;
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #ddd;
 }
 
 .zoom-controls button:hover {
-	background: #eee;
+	background: #f8f9fa;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	transform: scale(1.05);
+	border-color: #007bff;
+}
+
+.zoom-controls button:active {
+	transform: scale(0.95);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive para controles de zoom */
+@media (max-width: 768px) {
+	.zoom-controls {
+		top: 8px;
+		right: 8px;
+		padding: 4px;
+	}
+	
+	.zoom-controls button {
+		width: 36px;
+		height: 36px;
+		font-size: 16px;
+	}
+	
+	/* Ajustar altura del gráfico en móviles */
+	[data-chart="overview"] {
+		height: 300px;
+		max-height: 300px;
+	}
+	
+	.chart-wrapper {
+		margin-bottom: 10px;
+	}
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+	.zoom-controls {
+		top: 6px;
+		right: 6px;
+		padding: 3px;
+		gap: 3px;
+	}
+	
+	.zoom-controls button {
+		width: 30px;
+		height: 30px;
+		font-size: 14px;
+	}
+	
+	[data-chart="overview"] {
+		height: 250px;
+		max-height: 250px;
+	}
 }
