@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios - Feel Your Emotions</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css">
     <link rel="stylesheet" href="../../../assets/css/styles.css">
 </head>
 <body>
@@ -93,14 +94,58 @@
                                                     <div class="row my-3">
                                                         <div class="col-12">
                                                             <label for="user-context" class="form-label">Contexto de vulnerabilidad:</label>
-                                                            <textarea disabled class="form-control" type="text" id="user-context"></textarea>
+                                                            <textarea disabled class="form-control fst-italic" type="text" id="user-context"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <h5 class="fs-6">Datos última encuesta:</h4>
+                                                    <div class="row my-2">
+                                                        <div class="col-4">
+                                                            <label for="user-mood" class="form-label">Ánimo:</label>
+                                                            <input disabled class="form-control" type="number" id="user-mood">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="user-anxiety" class="form-label">Ansiedad:</label>
+                                                            <input disabled class="form-control" type="number" id="user-anxiety">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="user-sleep" class="form-label">Nivel sueño:</label>
+                                                            <input disabled class="form-control" type="number" id="user-sleep">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-4">
+                                                            <label for="user-social" class="form-label">Social:</label>
+                                                            <input disabled class="form-control" type="number" id="user-social">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="user-energy" class="form-label">Energía:</label>
+                                                            <input disabled class="form-control" type="number" id="user-energy">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="user-stress" class="form-label">Estrés:</label>
+                                                            <input disabled class="form-control" type="number" id="user-stress">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-4">
+                                                            <label for="user-hopeful" class="form-label">Esperanza:</label>
+                                                            <input disabled class="form-control" type="number" id="user-hopeful">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="crisis-alert" class="form-label">Alerta de Crisis:</label>
+                                                            <input disabled class="form-control" type="text" id="crisis-alert">
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="wellness-score" class="form-label">Bienestar:</label>
+                                                            <input disabled class="form-control" type="number" id="wellness-score">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-5 card">
-                                                <span class="form-label fw-semibold">Evolución Bienestar:</span>
-                                                <ul class="list-group list-group-flush" id="listaSignosVitales"></ul>
+                                                <span class="form-label fw-semibold">Recomendaciones IA 🤖:</span>
+                                                <div id="markdown-container" class="markdown-body fs-6 fst-italic">🖐🏻 Espera un momento... ⏳</div>
                                             </div>
                                         </div>
                                     </div>
@@ -125,6 +170,7 @@
     
     <script type="module" src="../../controllers/visualizations/usersController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="" crossorigin="anonymous"></script>
 </body>
 </html>

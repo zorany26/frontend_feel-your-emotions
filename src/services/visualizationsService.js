@@ -1,4 +1,4 @@
-const URL = "http://localhost:8000/api/visualization";
+const URL = "http://localhost:8000/api/";
 
 export async function getVisualizationByGraph(graphType) {
     const allowedTypes = [
@@ -18,8 +18,18 @@ export async function getVisualizationByGraph(graphType) {
         }
     };
 
-    let serverResponse = await fetch(URL + "/" + graphType , getRequest);
+    let serverResponse = await fetch(URL + "visualization/" + graphType , getRequest);
     if (!serverResponse.ok) throw new Error("No se pudo obtener el SVG");
     let svgText = await serverResponse.text();
     return svgText;
+}
+
+export async function getDescriptiveStatistics(){
+    let getRequest = {
+        method: "GET"
+    };
+    let serverResponse = await fetch(URL + "statistics" , getRequest);
+    if (!serverResponse.ok) throw new Error("No se pudo obtener las estadísticas descriptivas");
+    let stats = await serverResponse.json();
+    return stats;
 }

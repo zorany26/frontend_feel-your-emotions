@@ -1,5 +1,4 @@
-import { getUsers } from "/src/services/userService.js";
-import { getVisualizationByGraph } from "/src/services/visualizationsService.js";
+import { getVisualizationByGraph, getDescriptiveStatistics } from "/src/services/visualizationsService.js";
 
 // --- Variables de control ---
 let zoomLevel = 1;
@@ -182,6 +181,28 @@ function showVisualization(selectedGraph = "mood-distribution") {
     });
 }
 
+function showStatistics() {
+  const statsContainer = document.getElementById("statistics-container");
+  if (!statsContainer) return;
+  getDescriptiveStatistics()
+    .then((stats) => {
+      statsContainer.innerHTML = `
+        <li>Usuarios registrados: <strong>${stats.usuarios.total}</strong></li>
+        <li>Edad promedio: <strong>${stats.usuarios.edad_promedio.toFixed(0)}</strong></li>
+        <li>Edad menor: <strong>${stats.usuarios.edad_min}</strong></li>
+        <li>Edad mayor: <strong>${stats.usuarios.edad_max}</strong></li>
+        <li>Encuestas Totales: <strong>${stats.encuestas.total}</strong></li>
+        <li>Promedio de ánimo: <strong>${stats.encuestas.mood_promedio.toFixed(2)}</strong></li>
+        <li>Promedio de bienestar: <strong>${stats.encuestas.wellness_promedio.toFixed(2)}</strong></li>
+        <li>Encuestas por usuario: <strong>${stats.encuestas.encuestas_por_usuario.toFixed(2)}</strong></li>
+      `;
+    })
+    .catch((error) => {
+      console.error("Error al cargar las estadísticas descriptivas:", error);
+      statsContainer.innerHTML = "<li>Error al cargar las estadísticas 😔</li>";
+    });
+}
+
 // --- Función para inicializar la vista ---
 function initializeVisualizationsView() {
     const visualizationTypeSelect = document.getElementById("visualization-type");
@@ -271,6 +292,7 @@ function initializeVisualizationsView() {
     
     // Cargar visualización por defecto
     showVisualization();
+    showStatistics();
 }
 
 // Inicializar cuando se carga la página

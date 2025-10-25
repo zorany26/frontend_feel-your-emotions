@@ -50,6 +50,13 @@ function initializeUserController() {
     });
 
     generateUsersButton.addEventListener("click", () => {
+        Swal.fire({
+            title: "Espera un momento",
+            text: "Los usuarios de prueba se están generando",
+            icon: "info",
+            timer: 1500,
+            showConfirmButton: false
+        });
         generateRandomUsers()
         .then((response) => {
             console.log(response);
@@ -71,7 +78,6 @@ function initializeUserController() {
             });
         });
     });
-
 }
 
 function validateData(user) {

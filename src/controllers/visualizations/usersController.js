@@ -1,7 +1,6 @@
-import {
-  getUsers,
-  getUserById,
-} from "/src/services/userService.js";
+import { getUsers, getUserById } from "/src/services/userService.js";
+import { getSurveysByUserId } from '/src/services/surveyService.js';
+import { queryChatGPT } from '/src/services/chatgptService.js';
 
 function showViewInfo() {
   showLoading(true);
@@ -80,6 +79,9 @@ function showUserWindowModal(id) {
   let userGenderInput = document.getElementById("user-gender");
   let userContextTextArea = document.getElementById("user-context");
 
+  let userData = null;
+  let surveyData = null;
+
   getUserById(id)
     .then(function (backendResponse) {
       console.log(backendResponse);
@@ -87,10 +89,66 @@ function showUserWindowModal(id) {
       if (userAgeInput) userAgeInput.value = backendResponse.age;
       if (userGenderInput) userGenderInput.value = backendResponse.gender;
       if (userContextTextArea) userContextTextArea.value = backendResponse.context;
+      userData = backendResponse;
+      return userData
     })
     .catch(function (error) {
       console.error(error);
     });
+
+  getSurveysByUserId(id)
+    .then(function (backendResponse) {
+      console.log(backendResponse);
+      // obtener la encuesta mas reciente
+      let recentSurvey = null;
+      if (backendResponse.length > 0) {
+        recentSurvey = backendResponse.reduce((prev, current) => {
+          return (new Date(prev.created_at) > new Date(current.created_at)) ? prev : current;
+        });
+      }else {
+        recentSurvey = null;
+      }
+      if (recentSurvey != null) {
+        document.getElementById("user-mood").value = recentSurvey.mood;
+        document.getElementById("user-sleep").value = recentSurvey.sleep;
+        document.getElementById("user-social").value = recentSurvey.social;
+        document.getElementById("user-anxiety").value = recentSurvey.anxiety;
+        document.getElementById("user-energy").value = recentSurvey.energy;
+        document.getElementById("user-stress").value = recentSurvey.stress;
+        document.getElementById("user-hopeful").value = recentSurvey.hopeful;
+        document.getElementById("crisis-alert").value = recentSurvey.crisis_alert ? "⚠️" : "👍🏻";
+        document.getElementById("wellness-score").value = recentSurvey.wellness_score;
+        surveyData = recentSurvey
+        return surveyData
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+  
+  // Esperar un momento para asegurar que los datos estén cargados
+  console.log("data-1:", userData, surveyData)
+  setTimeout(() => {
+    console.log("data-2:", userData, surveyData)
+    if (userData && surveyData) {
+    let prompt = buildPrompt(userData, surveyData);
+    console.log("promt ",prompt)
+    queryChatGPT(prompt)
+      .then(function (backendResponse) {
+      console.log(backendResponse);
+      // Convierte Markdown a HTML usando la librería "marked"
+      const htmlContent = marked.parse(backendResponse);
+      // Inserta el HTML resultante en el contenedor
+      document.getElementById("markdown-container").innerHTML = htmlContent;
+    })
+      .catch(function (error) {
+      console.error(error);
+      document.getElementById("markdown-container").innerHTML = error
+    });
+    }
+  }, 1000);
+
+
 }
 
 async function filterTable(filterText) {
@@ -124,6 +182,25 @@ function showLoading(show) {
         if (loadingSpinner) loadingSpinner.classList.add('d-none');
     }
 }
+
+function buildPrompt(userData, surveyData) {
+        return `
+            Análisis emocional para ${userData.name}:
+            - Edad: ${userData.age}
+            - Contexto de vulnerabilidad: ${userData.context}
+            - Estado de ánimo (1 a 5): ${surveyData.mood}
+            - Nivel de ansiedad (1 a 5): ${surveyData.anxiety}
+            - Calidad de sueño (1 a 5): ${surveyData.sleep}
+            - Conexión social (1 a 5): ${surveyData.social}
+            - Nivel de energía (1 a 5): ${surveyData.energy}
+            - Nivel de esperanza (1 a 5): ${surveyData.hopeful}
+            - Nivel de estrés (1 a 5): ${surveyData.stress}
+            - Puntaje de bienestar calculado: ${surveyData.wellness_score}
+            - Situación de crisis: ${surveyData.crisis_alert ? 'Sí' : 'No'}
+
+            Por favor, proporciona recomendaciones personalizadas y empáticas para mejorar el bienestar emocional. Se lo mas conciso posible, como mucho dos o tres párrafos, máximo 200 tokens.
+        `.trim();
+    }
 
 // Inicializar cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
