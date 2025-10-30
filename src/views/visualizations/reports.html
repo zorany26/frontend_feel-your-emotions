@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Feel Your Emotions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+</head>
+<body>
+    <header class="site-header bg-light border-bottom">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between py-3">
+            <a href="../../../index.html" class="d-flex align-items-center text-dark text-decoration-none logo">
+                <strong>👐🏻 Feel Your Emotions</strong>
+            </a>
+
+            <nav class="nav nav-pills flex-wrap">
+                <a class="nav-link" href="../../../index.html">Inicio</a>
+                <a class="nav-link" href="visualizations.html">Visualizaciones</a>
+                <a class="nav-link" href="../forms/survey.html">Encuesta</a>
+                <a class="nav-link" href="../forms/user.html">Registro</a>
+                <a class="nav-link" href="users.html">Usuarios</a>
+                <a class="nav-link active" href="reports.html">Reportes</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="app" class="site-main">
+        <div class="container py-4">
+            <section aria-labelledby="reports-title">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h1 id="reports-title" class="h3 m-0">Reportes de Encuestas</h1>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-outline-primary" id="refresh-btn">
+                                    <span>🔄</span> Actualizar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Filtros y acciones -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h2 class="h5 m-0">Filtros y Acciones</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-primary w-100" id="show-all-btn">
+                                            📊 Mostrar Todas las Encuestas
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-warning w-100" id="show-crisis-btn">
+                                            ⚠️ Encuestas en Crisis
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="d-flex gap-2">
+                                            <select id="user-select" class="form-select">
+                                                <option value="">Seleccionar usuario</option>
+                                            </select>
+                                            <button type="button" class="btn btn-info" id="show-by-user-btn">
+                                                👤 Filtrar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información del filtro actual -->
+                        <div class="alert alert-info d-none" id="filter-info" role="alert">
+                            <strong>Filtro actual:</strong> <span id="filter-text">Todas las encuestas</span>
+                        </div>
+
+                        <!-- Tabla de encuestas -->
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 class="h5 m-0">Resultados</h3>
+                                <span class="badge bg-secondary" id="total-count">0 encuestas</span>
+                            </div>
+                            <div class="card-body">
+                                <!-- Loading spinner -->
+                                <div class="text-center py-4 d-none" id="loading-spinner">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Cargando...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Cargando encuestas...</p>
+                                </div>
+
+                                <!-- Tabla -->
+                                <div class="table-responsive" id="table-container">
+                                    <table class="table table-hover" id="surveys-table">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Fecha</th>
+                                                <th>Periodicidad</th>
+                                                <th>Puntaje de Bienestar</th>
+                                                <th>Alerta de Crisis</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="surveys-tbody">
+                                            <!-- Los datos se cargarán dinámicamente -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Mensaje cuando no hay datos -->
+                                <div class="text-center py-4 d-none" id="no-data-message">
+                                    <div class="text-muted">
+                                        <span style="font-size: 3rem;">📋</span>
+                                        <h4>No hay encuestas disponibles</h4>
+                                        <p>No se encontraron encuestas con los filtros seleccionados.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para ver detalles de encuesta -->
+    <div class="modal fade" id="surveyDetailModal" tabindex="-1" aria-labelledby="surveyDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger fw-bolder text-white">
+                    <h5 class="modal-title" id="surveyDetailModalLabel">Detalles de Encuesta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body-content">
+                    <!-- El contenido se cargará dinámicamente -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer bg-white border-top">
+        <div class="container py-3 text-center small text-muted">
+            © <span id="year"></span> Feel Your Emotions — Proyecto integrador Nuevas Tecnologías CESDE
+        </div>
+    </footer>
+    
+    <script type="module" src="../../controllers/visualizations/reportsController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="" crossorigin="anonymous"></script>
+</body>
+</html>
