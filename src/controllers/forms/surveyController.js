@@ -73,8 +73,8 @@ function renderQuestions(questionList) {
                 <legend class="col-form-label">${question} *</legend>
                 <div class="d-flex gap-2 flex-wrap align-items-center">
                     <div class="container d-flex justify-content-between w-100 mb-1">
-                        <span class="align-self-start small text-muted">${questionMin}</span>
-                        <span class="align-self-end small text-muted">${questionMax}</span>
+                        <span class="align-self-start small text-muted">${questionMin}😔</span>
+                        <span class="align-self-end small text-muted">${questionMax}😁</span>
                     </div>
                     <input 
                         type="range" 

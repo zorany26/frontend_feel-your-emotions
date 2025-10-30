@@ -6,7 +6,9 @@ export async function getVisualizationByGraph(graphType) {
         'gender-analysis',
         'correlation-heatmap',
         'risk-analysis',
-        'context-analysis'
+        'context-analysis',
+        'trend-analysis',
+        'emotional-state'
     ];
     if (!allowedTypes.includes(graphType)) {
         throw new Error(`Tipo de visualización no permitido: ${graphType}`);

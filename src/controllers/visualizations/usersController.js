@@ -133,6 +133,7 @@ function showUserWindowModal(id) {
     if (userData && surveyData) {
     let prompt = buildPrompt(userData, surveyData);
     console.log("promt ",prompt)
+    document.getElementById("markdown-container").innerHTML = "🖐🏻 Espera un momento... ⏳";
     queryChatGPT(prompt)
       .then(function (backendResponse) {
       console.log(backendResponse);
@@ -147,8 +148,7 @@ function showUserWindowModal(id) {
     });
     }
   }, 1000);
-
-
+  
 }
 
 async function filterTable(filterText) {
