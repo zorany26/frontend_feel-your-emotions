@@ -81,14 +81,46 @@ function initializeUserController() {
 }
 
 function validateData(user) {
+    // Validar que todos los campos requeridos estén presentes
     if (!user.name || !user.age || !user.context) {
         Swal.fire({
-            title: "Necesitas ingresar datos",
-            text: "Ingresa correctamente los campos requeridos",
+            title: "Datos incompletos",
+            text: "Todos los campos marcados son requeridos",
             icon: "error"
         });
         return false;
     }
+
+    // Validar el nombre (no vacío y al menos 2 caracteres)
+    if (user.name.trim().length < 2) {
+        Swal.fire({
+            title: "Nombre inválido",
+            text: "El nombre debe tener al menos 2 caracteres",
+            icon: "error"
+        });
+        return false;
+    }
+
+    // Validar la edad (entre 13 y 25 años)
+    if (user.age < 13 || user.age > 25) {
+        Swal.fire({
+            title: "Edad fuera de rango",
+            text: "La edad debe estar entre 13 y 25 años",
+            icon: "error"
+        });
+        return false;
+    }
+
+    // Validar el contexto (no vacío y al menos 10 caracteres)
+    if (user.context.trim().length < 10) {
+        Swal.fire({
+            title: "Contexto inválido",
+            text: "Por favor, proporciona más detalles en el contexto (mínimo 10 caracteres)",
+            icon: "error"
+        });
+        return false;
+    }
+
     return true;
 }
 
