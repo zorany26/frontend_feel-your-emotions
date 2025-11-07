@@ -20,11 +20,11 @@ Desarrollar una herramienta tecnológica que permita:
 ```
 root/
 ├── src/
-│   ├── controllers/
+│   ├── controllers/           # Scripts que manipulan las vistas
 │   │   ├── forms/
 │   │   └── visualizations/
 │   ├── services/              # Controladores para peticiones HTTP
-│   └── views/         
+│   └── views/                 # Vistas de la aplicación   
 │       ├── forms/
 │       └── visualizations/
 ├── assets/
@@ -32,6 +32,10 @@ root/
 │   └── images/
 └── index.html
 ```
+
+## 🌐 Enlaces 
+- **Repositorio Backend**: [repo](https://github.com/ADNdavid/backend_feel-your-emotions)
+- **Sitio en vivo**: [GitHub Pages](https://zorany26.github.io/frontend_feel-your-emotions/)
 
 ## 📈 Estado del Proyecto
 
